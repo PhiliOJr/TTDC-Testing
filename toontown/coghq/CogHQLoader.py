@@ -3,6 +3,7 @@ from direct.fsm import StateData
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 import CogHQLobby
+from toontown import battle
 from toontown.hood import QuietZoneState
 from toontown.hood import ZoneUtil
 from toontown.town import TownBattle
@@ -19,6 +20,8 @@ class CogHQLoader(StateData.StateData):
         self.placeDoneEvent = 'cogHQLoaderPlaceDone'
         self.townBattleDoneEvent = 'town-battle-done'
         self.musicFile = 'phase_9/audio/bgm/encntr_suit_HQ_nbrhood.ogg'
+        self.musicDict = {}
+        self.battleMusicDict = {}
         self.battleMusicFile = 'phase_9/audio/bgm/encntr_suit_winning.ogg'
         self.fsm = ClassicFSM.ClassicFSM('CogHQLoader', [State.State('start', None, None, ['quietZone', 'cogHQExterior', 'cogHQBossBattle']),
          State.State('cogHQExterior', self.enterCogHQExterior, self.exitCogHQExterior, ['quietZone', 'cogHQLobby']),
@@ -35,9 +38,15 @@ class CogHQLoader(StateData.StateData):
         Suit.loadSuits(3)
         self.loadPlaceGeom(zoneId)
 
-    def resetMusic(self):
-        self.music = base.loader.loadMusic(self.musicFile)
-        self.setBattleMusic()
+    def resetMusic(self, zoneId=None):
+        if not zoneId:
+            musicFile = self.musicFile
+            battleMusicFile = self.battleMusicFile
+        else:
+            musicFile = self.musicDict[zoneId]
+            battleMusicFile = self.battleMusicDict[zoneId]
+        self.music = base.loader.loadMusic(musicFile)
+        self.battleMusic = base.loader.loadMusic(battleMusicFile)
 
     def loadPlaceGeom(self, zoneId):
         pass

@@ -46,7 +46,8 @@ suitHeadTypes = ['f',
                  'ps',
                  'tr',
                  'gk',
-                 'fm']
+                 'fm',
+                 'nh']
 suitATypes = ['ym',
               'hh',
               'tbc',
@@ -63,6 +64,7 @@ suitATypes = ['ym',
               'mh',
               'af',
               'tr',
+              'nh',
               'foreman']
 suitBTypes = ['p',
               'ds',
@@ -89,7 +91,7 @@ suitCTypes = ['f',
 suitNamesByDept = {'c': ['f', 'p', 'ym', 'mm', 'ds', 'hh', 'cr', 'tbc'],
                     'l': ['bf', 'b', 'dt', 'ac', 'bs', 'sd', 'le', 'bw'],
                     'm': ['sc', 'pp', 'tw', 'bc', 'nc', 'mb', 'ls', 'rb'],
-                    's': ['cc', 'tm', 'nd', 'gh', 'ms', 'tf', 'm', 'mh', 'fc', 'ps', 'af', 'tr', 'gk', 'fm']}
+                    's': ['cc', 'tm', 'nd', 'gh', 'ms', 'tf', 'm', 'mh', 'fc', 'ps', 'af', 'tr', 'gk', 'fm', 'nh']}
 specialNamesByDept = {'s': ['foreman']}
 suitDepts = ['c',
              'l',

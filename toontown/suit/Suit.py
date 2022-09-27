@@ -126,6 +126,12 @@ fm = (('effort', 'effort', 5),
       ('throw-paper', 'throw-paper', 5),
       ('stomp', 'stomp', 5),
       ('quick-jump', 'jump', 5))
+nh = (('speak', 'speak', 5),
+ ('throw-object', 'throw-object', 5),
+ ('glower', 'glower', 5),
+ ('magic1', 'magic1', 5),
+ ('smile', 'smile', 5),
+ ('throw-paper', 'throw-paper', 5))
 sc = (('throw-paper', 'throw-paper', 3.5), ('watercooler', 'watercooler', 5), ('pickpocket', 'pickpocket', 5))
 pp = (('throw-paper', 'throw-paper', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
 tw = (('throw-paper', 'throw-paper', 3.5),
@@ -713,6 +719,12 @@ class Suit(Avatar.Avatar):
             self.headTexture = 'first-mover.jpg'
             self.generateHead('movershaker')
             self.setHeight(8.3)
+        elif dna.name == 'nh':
+            self.scale = 6.24 / aSize
+            self.handColor = Vec3(0.1, 0.1, 0.1)
+            self.generateBody()
+            self.generateHead('newshound')
+            self.setHeight(8.0)
         self.setName(SuitBattleGlobals.SuitAttributes[dna.name]['name'])
         self.getGeomNode().setScale(self.scale)
         self.generateHealthBar()

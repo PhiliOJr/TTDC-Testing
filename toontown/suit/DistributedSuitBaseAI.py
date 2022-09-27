@@ -72,7 +72,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
                 level = attributes['level'] + len(attributes['hp'])
         else:
             if hqZone:
-                maxTier = 6
+                maxTier = 7
             else:
                 maxTier = 5
             dna.newSuitRandom(level, track, maxTier)

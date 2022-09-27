@@ -1,0 +1,5 @@
+- New camera stuck in the ground after battle (difficult to fix)
+Low priority:
+- The zap movies sometimes prematurely jump to the death animation (just a visual bug)
+- Tutorial with new camera is broken (skipped for now, develop new tutorial later)
+- With 2 instakill sounds, only the first goes off (very minor bug)

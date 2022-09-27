@@ -610,7 +610,8 @@ class BattleCalculatorAI(DirectObject):
                                             if self.battle.activeSuits[targetPos] == suit), None)
                         if unluredSuit:
                             kbBonus = unluredSuitDict[unluredSuit]['kbBonus']
-                        attack[TOON_KBBONUS_COL][targetPos] = math.ceil(totalDamages * kbBonus)
+                        suit = self.battle.activeSuits[targetPos]
+                        attack[TOON_KBBONUS_COL][targetPos] = math.ceil(suit.getActualLevel() * attack[TOON_LVL_COL])
                         self.notify.debug('Applying kb bonus to track %s of %s to target %s' %
                                           (attack[TOON_TRACK_COL], attack[TOON_KBBONUS_COL][targetPos], targetPos))
                     else:

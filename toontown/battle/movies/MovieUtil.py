@@ -284,15 +284,9 @@ def createSuitDeathTrack(suit, battle, npcToons=None, headless=False):
         npcToons = []
     suitTrack = Sequence()
     suitPos, suitHpr = battle.getActorPosHpr(suit)
+    deathSuit = suit
     __removeTrainTrap(battle, suit, suitTrack)
-    deathSuit = suit.getLoseActor(headless=headless)
-    suitTrack.append(Func(notify.debug, 'before insertDeathSuit'))
-    suitTrack.append(Func(insertDeathSuit, suit, deathSuit, battle, suitPos, suitHpr))
-    suitTrack.append(Func(notify.debug, 'before actorInterval lose'))
-    suitTrack.append(ActorInterval(deathSuit, 'lose', duration=SUIT_LOSE_DURATION))
-    suitTrack.append(Func(notify.debug, 'before removeDeathSuit'))
-    suitTrack.append(Func(removeDeathSuit, suit, deathSuit, name='remove-death-suit'))
-    suitTrack.append(Func(notify.debug, 'after removeDeathSuit'))
+    suitTrack.append(ActorInterval(suit, 'lose', duration=SUIT_LOSE_DURATION))
     deathSoundTrack = getDeathSoundtrack(deathSuit)
     gears1Track, gears2MTrack = __deathParticleTracks(battle, suit, suitPos)
     toonMTrack = __toonDuckTracks(battle, npcToons)

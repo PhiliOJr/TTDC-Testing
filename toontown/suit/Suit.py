@@ -23,7 +23,7 @@ AllSuitsMinigame = (('victory', 'victory'),
                     ('tug-o-war', 'tug-o-war'),
                     ('slip-backward', 'slip-backward'),
                     ('slip-forward', 'slip-forward'))
-AllSuitsTutorialBattle = (('lose', 'lose'), ('pie-small-react', 'pie-small'), ('squirt-small-react', 'squirt-small'))
+AllSuitsTutorialBattle = (('lose', 'lose'), ('loseSkele', 'loseSkele'), ('pie-small-react', 'pie-small'), ('squirt-small-react', 'squirt-small'))
 AllSuitsBattle = (('drop-react', 'anvil-drop'),
                   ('flatten', 'drop'),
                   ('sidestep-left', 'sidestep-left'),
@@ -776,7 +776,7 @@ class Suit(Avatar.Avatar):
                 animDict['neutral'] = 'phase_3.5/models/char/suitC-neutral'
                 for anim in SuitsCEOBattle:
                     animDict[anim[0]] = 'phase_12/models/char/suitC-' + anim[1]
-
+        
         try:
             animList = eval(self.style.name)
         except NameError:
@@ -979,18 +979,18 @@ class Suit(Avatar.Avatar):
 
     def generateHealthBar(self):
         self.removeHealthBar()
-        model = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
-        button = model.find('**/minnieCircle')
-        button.setScale(3.0)
-        button.setH(180.0)
+        model = loader.loadModel('phase_3.5/models/props/ttlaff_suit_health_meter.egg')
+        button = model.find('**/hp_in')
+        model.setScale(2.0)
+        model.setH(180.0)
         button.setColor(self.healthColors[0])
-        if base.config.GetBool('want-new-cogs', 0):
+        if ConfigVariableBool('want-new-cogs', 0):
             chestNull = self.find('**/def_joint_attachMeter')
             if chestNull.isEmpty():
                 chestNull = self.find('**/joint_attachMeter')
         else:
             chestNull = self.find('**/joint_attachMeter')
-        button.reparentTo(chestNull)
+        model.reparentTo(chestNull)
         self.healthBar = button
         glow = BattleProps.globalPropPool.getProp('glow')
         glow.reparentTo(self.healthBar)
@@ -1101,6 +1101,7 @@ class Suit(Avatar.Avatar):
         self.loseActor.setHpr(self.getHpr())
         self.loseActor.setBlend(frameBlend=base.settings.getBool('game', 'interpolate-animations', False))
         shadowJoint = self.loseActor.find('**/joint_shadow')
+        
         dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
         dropShadow.setScale(0.45)
         dropShadow.setColor(0.0, 0.0, 0.0, 0.5)

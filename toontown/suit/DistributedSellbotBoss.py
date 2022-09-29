@@ -408,8 +408,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 Func(camera.setPosHpr, -12, 48, 94, -26, 20, 0),
                 ActorInterval(self.cagedToon, 'wave'),
                 Func(self.cagedToon.loop, 'neutral'))),
-            (31, Parallel(Func(base.playMusic, self.revealMusic, looping=0, volume=1),
-                          Sequence(Func(camera.setPosHpr, -20, -35, 10, -88, 25, 0),
+            (31, Parallel(Sequence(Func(camera.setPosHpr, -20, -35, 10, -88, 25, 0),
                                    Func(self.setChatAbsolute, discoverToons, CFSpeech),
                                    Func(self.cagedToon.nametag3d.setScale, 1),
                                    Func(self.rescueToon.nametag3d.setScale, 1),
@@ -420,8 +419,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             (34, Sequence(Func(self.clearChat),
                           self.loseCogSuits(self.toonsA, self.battleANode, (0, 18, 5, -180, 0, 0)),
                           self.loseCogSuits(self.toonsB, self.battleBNode, (0, 18, 5, -180, 0, 0)))),
-            (37, Parallel(Func(base.playMusic, self.introMusic, looping=0, volume=1),
-                          Sequence(self.toonNormalEyes(self.involvedToons),
+            (37, Parallel(Sequence(self.toonNormalEyes(self.involvedToons),
                                    Func(camera.setPosHpr, -23.4, -145.6, 44.0, -10.0, -12.5, 0),
                                    Func(self.loop, 'Fb_neutral'),
                                    Func(self.rampA.request, 'retract'),
@@ -593,7 +591,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def loadEnvironment(self):
         DistributedBossCog.DistributedBossCog.loadEnvironment(self)
-        self.geom = loader.loadModel('phase_9/models/cogHQ/BossRoomHQ')
+        self.geom = loader.loadModel('phase_9/models/cogHQ/bossroom.egg')
         self.rampA = self.__findRamp('rampA', '**/west_ramp2')
         self.rampB = self.__findRamp('rampB', '**/west_ramp')
         self.rampC = self.__findRamp('rampC', '**/west_ramp1')
@@ -622,12 +620,13 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rope.ropeNode.setUvScale(0.8)
         self.rope.setTexture(self.cage1.findTexture('hq_chain'))
         self.rope.setTransparency(1)
-        self.elevatorMusic = base.loader.loadMusic('phase_9/audio/bgm/sb_elevator.ogg')
-        self.introMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_head_suit_theme.ogg')
+        self.elevatorMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_elevator.ogg')
+        self.introMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_boss_cutscene_1.ogg')
         self.revealMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_sting_announce.ogg')
-        self.betweenBattleMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_toon_winning.ogg')
-        self.battleTwoMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_vp_suits.ogg')
-        self.battleThreeMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_vp_pie.ogg')
+        self.betweenBattleMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_boss_cutscene_2.ogg')
+        self.battleTwoMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_boss_encntr_2.ogg')
+        self.battleOneMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_boss_encntr_1.ogg')
+        self.battleThreeMusic = base.loader.loadMusic('phase_9/audio/bgm/SB_boss_pie.ogg')
         self.geom.reparentTo(render)
 
     def unloadEnvironment(self):

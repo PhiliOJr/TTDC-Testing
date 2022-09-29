@@ -308,8 +308,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.initializeBattles(2, SellbotBossBattleTwoPosHpr)
 
     def enterBattleTwo(self):
-        if self.battleA:
-            self.battleA.startBattle(self.toonsA, self.suitsA)
+        self.battleA.startBattle(self.toonsA, self.suitsA)
         if self.battleB:
             self.battleB.startBattle(self.toonsB, self.suitsB)
 

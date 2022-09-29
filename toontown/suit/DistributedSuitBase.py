@@ -41,6 +41,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
         self.cTrav = None
         self.sp = None
         self.fsm = None
+        self.skelecog = 0
         self.prop = None
         self.propInSound = None
         self.propOutSound = None
@@ -378,6 +379,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
     def setSkelecog(self, flag):
         SuitBase.SuitBase.setSkelecog(self, flag)
         if flag:
+            
             Suit.Suit.makeSkeleton(self)
 
     def setExecutive(self, flag):

@@ -80,7 +80,7 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
             self.d_joinDone(base.localAvatar.doId, suit.doId)
 
     def showSuitsJoining(self, suits, ts, name, callback):
-        if self.bossCog is None:
+        if self.bossCog == None:
             return
         if self.battleSide:
             openDoor = Func(self.bossCog.doorB.request, 'open')
@@ -98,23 +98,23 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
             suit.setPos(self.bossCog, 0, 0, 0)
             suit.headsUp(self)
             suit.setScale(3.8 / suit.height)
-            if suit in self.joiningSuits:
-                i = len(self.pendingSuits) + self.joiningSuits.index(suit)
-                destPos, h = self.suitPendingPoints[i]
-                destHpr = VBase3(h, 0, 0)
-            else:
-                destPos, destHpr = self.getActorPosHpr(suit, self.suits)
+            destPos, destHpr = self.getActorPosHpr(suit, self.suits)
             suitTrack.append(Track((delay, self.createAdjustInterval(suit, destPos, destHpr)), (delay + 1.5, suit.scaleInterval(1.5, 1))))
+            delay += 1
+        
+        for suit in self.activeSuits:
+            destPos, destHpr = self.getActorPosHpr(suit, self.suits)
+            suitTrack.append(self.createAdjustInterval(suit, destPos, destHpr))
             delay += 1
 
         if self.hasLocalToon():
             camera.reparentTo(self)
             if random.choice([0, 1]):
-                camera.setPosHpr(20, -4, 7, 60, 0, 0)
+                camLerpPosHprInterval = camera.posHprInterval(1.0, Point3(20, -4, 7), Point3(60, 0, 0), blendType='easeInOut')
             else:
-                camera.setPosHpr(-20, -4, 7, -60, 0, 0)
+                camLerpPosHprInterval = camera.posHprInterval(1.0, Point3(-20, -4, 7), Point3(-60, 0, 0), blendType='easeInOut')
         done = Func(callback)
-        track = Sequence(openDoor, suitTrack, closeDoor, done, name=name)
+        track = Sequence(camLerpPosHprInterval, openDoor, suitTrack, closeDoor, done, name=name)
         track.start(ts)
         self.storeInterval(track, name)
         return

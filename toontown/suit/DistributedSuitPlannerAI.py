@@ -427,6 +427,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if revives:
             newSuit.setSkeleRevives(revives)
         newSuit.generateWithRequired(newSuit.zoneId)
+        if self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_ZONE] >= 10000:
+            newSuit.b_setSkelecog(random.choice([0, 0, 0, 1]))
         newSuit.moveToNextLeg(None)
         self.suitList.append(newSuit)
         if newSuit.flyInSuit:

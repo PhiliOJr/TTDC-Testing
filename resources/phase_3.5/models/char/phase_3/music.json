@@ -1,0 +1,38 @@
+{
+    "default":
+    {
+        "11000": "phase_9/audio/bgm/SB_courtyard.ogg",
+        "11000_battle": "phase_9/audio/bgm/SB_courtyard_encntr.ogg",
+        "11100": "phase_9/audio/bgm/SB_boss_lobby.ogg",
+        "11200": "phase_9/audio/bgm/SB_factory_ext.ogg",
+		"11200_battle": "phase_9/audio/bgm/SB_factory_ext_encntr.ogg"
+    },
+    "halloween":
+    {
+        "main_theme": "phase_13/audio/bgm/halloween/halloween_ttcc_theme.ogg",
+        "toontown_central_sz": "phase_13/audio/bgm/halloween/halloween_ttc_sz.ogg",
+        "donalds_dock_sz": "phase_13/audio/bgm/halloween/halloween_bb_sz.ogg",
+        "olde_toontown_sz": "phase_13/audio/bgm/halloween/halloween_yott_sz.ogg",
+        "daisys_garden_sz": "phase_13/audio/bgm/halloween/halloween_dg_sz.ogg",
+        "minnies_melody_land_sz": "phase_13/audio/bgm/halloween/halloween_mml_sz.ogg",
+        "the_burrrgh_sz": "phase_13/audio/bgm/halloween/halloween_tb_sz.ogg",
+        "outdoor_zone_sz": "phase_13/audio/bgm/halloween/halloween_aa_sz.ogg",
+        "donalds_dreamland_sz": "phase_13/audio/bgm/halloween/halloween_ddl_sz.ogg"
+    },
+    "christmas":
+    {
+        "main_theme": "phase_13/audio/bgm/winter/christmas_ttcc_theme.ogg",
+        "toontown_central_sz": "phase_13/audio/bgm/winter/christmas_ttc_sz.ogg",
+        "donalds_dock_sz": "phase_13/audio/bgm/winter/christmas_bb_sz.ogg",
+        "olde_toontown_sz": "phase_13/audio/bgm/winter/christmas_yott_sz.ogg",
+        "daisys_garden_sz": "phase_13/audio/bgm/winter/christmas_dg_sz.ogg",
+        "minnies_melody_land_sz": "phase_13/audio/bgm/winter/christmas_mml_sz.ogg",
+        "the_burrrgh_sz": "phase_13/audio/bgm/winter/christmas_tb_sz.ogg",
+        "outdoor_zone_sz": "phase_13/audio/bgm/winter/christmas_aa_sz.ogg",
+        "donalds_dreamland_sz": "phase_13/audio/bgm/winter/christmas_ddl_sz.ogg"
+    },
+    "april-fools":
+    {
+        "main_theme": "phase_13/audio/bgm/april_toons/april_main_theme.ogg"
+    }
+}

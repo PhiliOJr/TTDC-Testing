@@ -36,8 +36,10 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
                           ToontownGlobals.SellbotLobby: 'phase_9/audio/bgm/SB_boss_lobby.ogg',
                           ToontownGlobals.SellbotFactoryExt: 'phase_9/audio/bgm/SB_factory_ext.ogg'}
         self.battleMusicDict = {ToontownGlobals.SellbotHQ: 'phase_9/audio/bgm/SB_courtyard_encntr.ogg',
-                          ToontownGlobals.SellbotFactoryExt: 'phase_9/audio/bgm/SB_factory_ext_encntr.ogg'}
+                          ToontownGlobals.SellbotFactoryExt: 'phase_9/audio/bgm/SB_factory_ext_encntr.ogg',
+                          ToontownGlobals.SellbotLobby: 'phase_9/audio/bgm/SB_factory_ext_encntr.ogg'}
         self.cogHQExteriorModelPath = 'phase_9/models/cogHQ/SellbotHQExterior'
+        self.cogHQExteriorModelPath2 = 'phase_9/models/cogHQ/SellbotHQExterior_new.egg'
         self.cogHQLobbyModelPath = 'phase_9/models/cogHQ/SellbotHQLobby'
         self.factoryExteriorModelPath = 'phase_9/models/cogHQ/SellbotFactoryExterior'
         self.geom = None
@@ -51,12 +53,16 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
         if self.geom:
             self.geom.removeNode()
             self.geom = None
+        if self.extModelReg:
+            self.extModelReg.removeNode()
+            self.extModelReg = None
         CogHQLoader.CogHQLoader.unloadPlaceGeom(self)
         return
 
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
+        self.extModelReg = loader.loadModel(self.cogHQExteriorModelPath2)
         if zoneId == ToontownGlobals.SellbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             dgLinkTunnel = self.geom.find('**/Tunnel1')
@@ -88,15 +94,8 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             door2 = doors.find('**/door_2')
             door3 = doors.find('**/door_3')
             index = 0
-            for door in [door0,
-                         door1,
-                         door2,
-                         door3]:
-                doorFrame = door.find('**/doorDoubleFlat/+GeomNode')
-                door.find('**/doorFrameHoleLeft').wrtReparentTo(doorFrame)
-                door.find('**/doorFrameHoleRight').wrtReparentTo(doorFrame)
-                doorFrame.node().setEffect(DecalEffect.make())
-                index += 1
+            self.extModelReg.reparentTo(render)
+            self.geom.hide()
 
         elif zoneId == ToontownGlobals.SellbotFactoryExt:
             self.geom = loader.loadModel(self.factoryExteriorModelPath)
@@ -147,6 +146,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             front = self.geom.find('**/frontWall')
             front.node().setEffect(DecalEffect.make())
             door = self.geom.find('**/door_0')
+            self.extModelReg.reparentTo(hidden)
             parent = door.getParent()
             door.wrtReparentTo(front)
             doorFrame = door.find('**/doorDoubleFlat/+GeomNode')

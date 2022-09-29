@@ -1022,7 +1022,12 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
 
     def __enterLocalToonWaitForInput(self):
         self.notify.debug('enterLocalToonWaitForInput()')
-        camera.setPosHpr(self.camPos, self.camHpr)
+        targetSuit = self.activeSuits[0]
+        for target in self.activeSuits:
+            if target.getHP() > targetSuit.getHP():
+                targetSuit = target
+        self.camPos[2] = targetSuit.getHeight() + 10.50
+        camera.posHprInterval(0.4, self.camPos, self.camHpr, blendType = 'easeInOut').start()
         base.camLens.setMinFov(self.camMenuFov / (4. / 3.))
         NametagGlobals.setMasterArrowsOn(0)
         self.townBattle.setState('Attack')

@@ -10,3 +10,10 @@ Credit to DTM For Declashified.
 
 - My Cogs:
 - News Hound (lv 8-20 SB County Executive)
+
+- Changes:
+- Cog Health Meters are now 3d like 1.3
+- Cogs don't use a lose actor anymore, they now use the animation like 1.3
+- Updated the Sellbot HQ and VP battle to be like 1.3
+- Updated Knockback Formula
+- More to come
